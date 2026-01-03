@@ -1,0 +1,51 @@
+partID,title,optA,optB,optC,optD,correct
+0,Trung thể thường nằm ở vị trí nào trong tế bào?,Gần nhân,Trong màng sinh chất,Trong ti thể,Trong nhân,A
+0,Cấu trúc cơ bản của trung thể gồm:,2 trung tử vuông góc,2 màng kép,9 sợi actin,1 màng lipid,A
+0,Trung thể tham gia trực tiếp vào quá trình:,Quang hợp,Phân bào,Dịch mã,Tiêu hóa,B
+0,"Trong tế bào không có trung thể, hiện tượng nào có thể bị rối loạn?",Tổng hợp protein,Hô hấp tế bào,Phân chia nhiễm sắc thể,Trao đổi chất,C
+0,Trung thể thuộc loại bào quan:,Có màng,Không có màng,Màng kép,Màng đơn,B
+1,Lysosome có chứa loại enzyme chủ yếu nào?,Enzyme hô hấp,Enzyme tiêu hóa,Enzyme tổng hợp protein,Enzyme xúc tác ATP,B
+1,Lysosome được hình thành từ:,Ribosome,Bộ máy Golgi,Lưới nội chất trơn,Trung thể,B
+1,Môi trường bên trong lysosome có tính:,Kiềm,Axit,Trung tính,Mặn,B
+1,Lysosome có thể “tự tiêu” tế bào khi:,Enzyme rò rỉ ra tế bào chất,Nhân vỡ,Màng Golgi mất chức năng,Ti thể ngừng hoạt động,A
+1,Chức năng không thuộc lysosome là:,Phân hủy tế bào già,Tiêu hóa nội bào,Tổng hợp protein,Tiêu hóa vật chất lạ,C
+2,Ribosome là bào quan:,Có màng,Không có màng,Màng kép,Màng đơn,B
+2,Thành phần chính của ribosome gồm:,Lipid và protein,rRNA và protein,DNA và lipid,Enzyme và carbohydrate,B
+2,Ribosome tự do tổng hợp:,Protein tiết ra ngoài,Protein sử dụng trong tế bào,Enzyme tiêu hóa,Protein màng,B
+2,Ribosome bám trên lưới nội chất hạt tổng hợp:,Protein màng và tiết,Enzyme tiêu hóa,DNA nhân,Axit amin,A
+2,Ribosome được tạo thành tại:,Nhân con,Ti thể,Golgi,Lysosome,A
+3,Nhân tế bào được bao quanh bởi:,Màng đơn,Màng kép có lỗ nhân,Màng đơn có ribosome,Màng lipid kép kín,B
+3,Chức năng chính của nhân:,Dự trữ năng lượng,Điều khiển mọi hoạt động tế bào,Tổng hợp protein,Phân giải chất độc,B
+3,Trong nhân con diễn ra quá trình:,Tạo rRNA và ribosome,Phân giải DNA,Tổng hợp lipid,Hình thành lysosome,A
+3,DNA nhân tồn tại dưới dạng:,Sợi xoắn RNA,Nhiễm sắc chất,Enzyme,Axit amin,B
+3,Nhân vỡ ra trong giai đoạn nào của phân bào?,Kỳ giữa,Kỳ đầu,Kỳ sau,Kỳ cuối,B
+4,Ti thể có mấy lớp màng?,1,2,3,Không có,B
+4,Nếp gấp trong màng trong ti thể gọi là:,Mào ti thể,Vi ống,Lưới màng,Thể vùi,A
+4,Ti thể là nơi diễn ra:,Quang hợp,Hô hấp hiếu khí,Tổng hợp protein,Tiêu hóa,B
+4,Chất nền của ti thể chứa:,DNA và ribosome riêng,Enzyme tiêu hóa,Sắc tố diệp lục,Dầu và tinh bột,A
+4,Năng lượng từ ti thể chủ yếu ở dạng:,Glucose,ATP,ADP,CO₂,B
+5,Lưới nội chất chia thành:,Hạt và trơn,Dày và mỏng,Trong và ngoài,Kép và đơn,A
+5,Lưới nội chất hạt có chức năng:,Tổng hợp lipid,Tổng hợp protein,Tiêu hóa nội bào,Tạo năng lượng,B
+5,Lưới nội chất trơn có vai trò:,Tổng hợp protein,"Tổng hợp lipid, khử độc",Tạo năng lượng,Phân giải đường,B
+5,Ribosome bám vào lưới nội chất nhờ:,Màng đôi,Thụ thể đặc hiệu,Enzyme tiêu hóa,Lipid,B
+5,Lưới nội chất liên hệ trực tiếp với:,Nhân và Golgi,Ti thể,Không bào,Lysosome,A
+6,Không bào trong tế bào động vật thường:,Lớn và chiếm phần lớn tế bào,"Nhỏ, tạm thời",Có diệp lục,Có màng kép,B
+6,Màng bao quanh không bào gọi là:,Tonoplast,Lysosome,Ribosome,Endosome,A
+6,Chức năng của không bào:,Tổng hợp protein,"Dự trữ, tiêu hóa, điều hòa áp suất",Quang hợp,Tạo năng lượng,B
+6,"Ở động vật đơn bào, không bào co bóp giúp:",Hấp thu năng lượng,Bài tiết nước dư,Tổng hợp lipid,Cố định CO₂,B
+6,Không bào được hình thành từ:,Lysosome và Golgi,Ti thể,Nhân,Trung thể,A
+7,Peroxisome chứa enzyme:,Catalase,Lipase,Amylase,Pepsin,A
+7,Chức năng của peroxisome là:,Tạo ATP,Phân giải H₂O₂,Tổng hợp protein,Tiêu hóa tế bào,B
+7,Sản phẩm của enzyme catalase là:,H₂O và O₂,CO₂ và ATP,Glucose và nước,Protein,A
+7,Peroxisome có nguồn gốc từ:,Lưới nội chất,Nhân,Ti thể,Lysosome,A
+7,Peroxisome khác lysosome ở chỗ:,Có enzyme tiêu hóa,"Có catalase, hoạt động ở môi trường trung tính",Có màng kép,Có DNA riêng,B
+8,Cấu trúc chính của bộ máy Golgi gồm:,Túi dẹt xếp chồng,Ống xoắn,Chuỗi cầu nối,Màng kép,A
+8,Golgi có vai trò:,Tổng hợp lipid,"Biến đổi, đóng gói, phân phối sản phẩm",Phân giải ATP,Tổng hợp RNA,B
+8,Protein từ lưới nội chất được chuyển đến Golgi qua:,Túi vận chuyển,Trung thể,Lysosome,Màng nhân,A
+8,Golgi tạo ra:,Lysosome,Ti thể,Nhân con,Ribosome,A
+8,Bộ máy Golgi nằm gần:,Nhân,Màng tế bào,Trung thể,Ti thể,A
+9,Tế bào chất là:,Môi trường chứa các bào quan,Thành tế bào,Màng tế bào,Nhân,A
+9,Thành phần chính của tế bào chất:,"Nước, muối, protein","Chất béo, sợi actin","DNA, RNA",Carbohydrate,A
+9,Dịch tế bào còn gọi là:,Tế bào tương,Chất gian bào,Nhân con,Nhiễm sắc chất,A
+9,Trong tế bào chất diễn ra:,Giai đoạn đầu của hô hấp tế bào,Tổng hợp DNA,Nhân đôi nhiễm sắc thể,Tạo ribosome,A
+9,Tính chất vật lý của tế bào chất là:,Chất rắn,Keo đặc,Chất khí,Dung dịch tinh khiết,B
