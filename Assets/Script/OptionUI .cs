@@ -1,4 +1,4 @@
-﻿// OptionUI.cs
+﻿
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,8 +7,8 @@ public class OptionUI : MonoBehaviour
 {
     public Button button;
     public Image background;
-    public TMP_Text labelLetter; // “A/B/C/D”
-    public TMP_Text labelText;   // nội dung đáp án
+    public TMP_Text labelLetter;
+    public TMP_Text labelText;
 
     [Header("Colors")]
     public Color normal = Color.white;
@@ -16,7 +16,7 @@ public class OptionUI : MonoBehaviour
     public Color correct = new(0.85f, 1f, 0.9f, 1f);
     public Color wrong = new(1f, 0.9f, 0.9f, 1f);
 
-    public int index; // 0..3
+    public int index;
     System.Action<int> onClick;
 
     public void Bind(string letter, string text, int idx, System.Action<int> onClicked)

@@ -13,6 +13,7 @@ public class ContentController : MonoBehaviour
 
     public void Init(Sprite img, string title, string content, PathType path, string partId)
     {
+        UIController.instance.HideAll();
         image.sprite = img;
         titleText.text = title;
         contentText.text = content;
@@ -20,14 +21,15 @@ public class ContentController : MonoBehaviour
         close.onClick.AddListener(() => {
             this.gameObject.SetActive(false);
             UIController.instance.joystick.gameObject.SetActive(true);
+            UIController.instance.ShowAll();
         });  
         quizz.onClick.RemoveAllListeners();
         quizz.onClick.AddListener(() => quizzAction(path.ToString(), partId, title));
     }
     private void quizzAction(string path, string partId, string text)
     {
-        
+
         UIController.instance.quizUIController.gameObject.SetActive(true);
-        UIController.instance.quizUIController.Init(partId, path, text);
+        UIController.instance.quizUIController.Init(path, partId, text);
     }
 }

@@ -4,19 +4,48 @@ using UnityEngine;
 
 public class ClickAble : MonoBehaviour, IClickable
 {
-    private Renderer rend;
     [Header("Info")]
     public string title = "Object Name";
     [TextArea(2, 4)] public string description = "Short description...";
     public PathType pathType;
     public string partId;
     public Sprite icon;
-    
+
     [Header("Sắp xếp Child")]
-    public bool enableChildSorting = true;
-    public float spacing = 1f; // Khoảng cách giữa các child
-    public bool sortFromTop = true; // true: từ trên xuống, false: từ dưới lên
-    public float startYOffset = 0f; // Offset Y ban đầu
+    public bool isValid = true;
+    public float spacing = 1f;
+    public bool sortFromTop = true;
+    public float startYOffset = 0f;
+
+    [Header("Blink Effect")]
+    public Color blinkColor = Color.yellow;
+    public float blinkSpeed = 2f; // Số lần nhấp nháy mỗi giây
+    public float blinkIntensity = 1.5f; // Độ sáng khi nhấp nháy
+
+    private Renderer rend;
+    private Coroutine blinkCoroutine;
+    private Material[] originalMaterials;
+    private Material[] blinkMaterials;
+    private bool isBlinking = false;
+
+    void Awake()
+    {
+        rend = GetComponent<Renderer>();
+        if (rend == null)
+        {
+            rend = GetComponentInChildren<Renderer>();
+        }
+        
+        if (rend != null)
+        {
+            originalMaterials = rend.materials;
+            blinkMaterials = new Material[originalMaterials.Length];
+            for (int i = 0; i < originalMaterials.Length; i++)
+            {
+                blinkMaterials[i] = new Material(originalMaterials[i]);
+            }
+        }
+    }
 
     public void OnClicked()
     {
@@ -24,43 +53,81 @@ public class ClickAble : MonoBehaviour, IClickable
         UIController.instance.contentController.Init(icon, title, description, pathType, partId);
         UIController.instance.joystick.gameObject.SetActive(false);
     }
-    
-    void SortChildrenByY()
+
+    // Bắt đầu nhấp nháy
+    public void StartBlink()
     {
-        if (transform.childCount == 0) return;
-        
-        // Lấy tất cả các child
-        List<Transform> children = new List<Transform>();
-        for (int i = 0; i < transform.childCount; i++)
+        if (isBlinking) return;
+        if (rend == null) return;
+
+        isBlinking = true;
+        if (blinkCoroutine != null)
         {
-            children.Add(transform.GetChild(i));
+            StopCoroutine(blinkCoroutine);
         }
-        
-        // Sắp xếp các child theo vị trí Y hiện tại (từ cao xuống thấp)
-        children.Sort((a, b) => 
+        blinkCoroutine = StartCoroutine(BlinkCoroutine());
+    }
+
+    // Dừng nhấp nháy
+    public void StopBlink()
+    {
+        if (!isBlinking) return;
+
+        isBlinking = false;
+        if (blinkCoroutine != null)
         {
-            if (sortFromTop)
-                return b.localPosition.y.CompareTo(a.localPosition.y); // Cao -> thấp
-            else
-                return a.localPosition.y.CompareTo(b.localPosition.y); // Thấp -> cao
-        });
-        
-        // Đặt lại vị trí Y cho các child
-        float currentY = startYOffset;
-        for (int i = 0; i < children.Count; i++)
+            StopCoroutine(blinkCoroutine);
+            blinkCoroutine = null;
+        }
+
+        // Khôi phục material ban đầu
+        if (rend != null && originalMaterials != null)
         {
-            Vector3 pos = children[i].localPosition;
-            if (sortFromTop)
+            rend.materials = originalMaterials;
+        }
+    }
+
+    // Coroutine để làm nhấp nháy bằng emission color
+    private IEnumerator BlinkCoroutine()
+    {
+        while (isBlinking)
+        {
+            // Sử dụng PingPong để tạo hiệu ứng nhấp nháy liên tục
+            float t = Mathf.PingPong(Time.time * blinkSpeed, 1f);
+            
+            // Thay đổi emission color để tạo hiệu ứng nhấp nháy
+            if (rend != null && blinkMaterials != null)
             {
-                pos.y = currentY;
-                currentY -= spacing;
+                rend.materials = blinkMaterials;
+                foreach (Material mat in blinkMaterials)
+                {
+                    if (mat != null && mat.HasProperty("_EmissionColor"))
+                    {
+                        Color emissionColor = Color.Lerp(Color.black, blinkColor * blinkIntensity, t);
+                        mat.SetColor("_EmissionColor", emissionColor);
+                        mat.EnableKeyword("_EMISSION");
+                    }
+                }
             }
-            else
+
+            yield return null;
+        }
+    }
+
+    void OnDestroy()
+    {
+        StopBlink();
+        
+        // Cleanup materials
+        if (blinkMaterials != null)
+        {
+            foreach (Material mat in blinkMaterials)
             {
-                pos.y = currentY;
-                currentY += spacing;
+                if (mat != null)
+                {
+                    Destroy(mat);
+                }
             }
-            children[i].localPosition = pos;
         }
     }
 }

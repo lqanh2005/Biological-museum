@@ -14,16 +14,16 @@ public class PlayerController_Stable : MonoBehaviour
     public float gravity = -20f;
 
     [Header("Look (Drag Mouse/Touch)")]
-    public Transform cameraRoot;                 // pivot (x pitch)
-    public float mouseSensitivity = 120f;        // Desktop/WebGL
-    [Range(0.1f, 1f)] public float webglMobileSensitivityMul = 0.65f; // giảm nếu WebGL mobile gắt
+    public Transform cameraRoot;
+    public float mouseSensitivity = 120f;
+    [Range(0.1f, 1f)] public float webglMobileSensitivityMul = 0.65f;
     public float minPitch = -85f;
     public float maxPitch = 85f;
 
     [Header("Joystick Move (Optional)")]
-    public Joystick moveJoystick;                // joystick trái
+    public Joystick moveJoystick;
     public float joystickDeadzone = 0.15f;
-    public bool useJoystickOnly = true;          // mobile bật true; PC muốn test WASD thì false
+    public bool useJoystickOnly = true;
 
     [Header("Click / Hover (World)")]
     public bool enableWorldClick = true;
@@ -36,14 +36,14 @@ public class PlayerController_Stable : MonoBehaviour
     [Header("Cursor (PC/WebGL)")]
     public bool lockCursorWhileRotating = true;
 
-    // --- internals
+
     CharacterController cc;
     Camera cam;
 
     Vector3 velocity;
     float pitch;
 
-    // Pointer state
+
     bool pointerDown;
     bool pointerStartedOnUI;
     bool rotating;
@@ -53,23 +53,34 @@ public class PlayerController_Stable : MonoBehaviour
     public NavMeshAgent agent;
     public bool isPlant;
     public Transform targetPlant;
+    public List<GameObject> listPlant = new List<GameObject>();
     public bool isNhanSo;
     public Transform targetNhanSo;
+    public List<GameObject> listNhanSo = new List<GameObject>();
     public bool isAnimal;
     public Transform targetAnimal;
-    
-    [Header("Auto Move Rotation")]
-    public float rotationSpeed = 5f;  // Tốc độ quay khi auto move
-    
-    // Track xem đã hiển thị tooltip chưa để tránh hiển thị nhiều lần
-    private bool hasShownTooltips = false;
-    private Transform lastTargetWithTooltips = null;
-    [SerializeField] private Transform currentTarget = null; // Track target hiện tại để phát hiện thay đổi
+    public List<GameObject> listAnimal = new List<GameObject>();
 
-    // Hover tracking
+    [Header("Auto Move Rotation")]
+    public float rotationSpeed = 5f;
+
+    [Header("Camera Settings When Reached Target")]
+    public Vector3 targetCameraPosition = new Vector3(0, 0.399f, 0);
+    public Vector3 targetCameraRotation = new Vector3(26.217f, 0, 0);
+    public float cameraTransitionSpeed = 2f;
+
+    private bool hasShownTooltips = false;
+    private bool hasSetCamera = false;
+    private bool isTransitioningCamera = false;
+    private Vector3 originalCameraPosition;
+    private Quaternion originalCameraRotation;
+    private Transform lastTargetWithTooltips = null;
+    [SerializeField] private Transform currentTarget = null;
+
+
     IClickable currentHovered;
 
-    // UI raycast cache (no GC)
+
     PointerEventData ped;
     readonly List<RaycastResult> uiHits = new List<RaycastResult>(16);
 
@@ -85,27 +96,28 @@ public class PlayerController_Stable : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        
-        // Cấu hình NavMeshAgent để tự động di chuyển
+
+
         if (agent != null)
         {
-            agent.updatePosition = true;   // NavMeshAgent tự động cập nhật vị trí
-            agent.updateRotation = false;  // Tắt auto rotation để tự điều khiển quay mượt
+            agent.updatePosition = true;
+            agent.updateRotation = false;
         }
     }
 
     void Update()
     {
-        HandlePointerState();   // click/drag detect (rotating)
-        HandleLook();           // drag mouse/touch to look
-        
-        // Chỉ di chuyển bằng CharacterController khi không phải chế độ auto move
+        HandlePointerState();
+        HandleLook();
+
+
+        // Di chuyển bằng NavMeshAgent khi không ở chế độ auto move
         if (!isPlant && !isNhanSo && !isAnimal)
         {
-            HandleMove();       // joystick/WASD move
+            HandleMove();
         }
-        
-        HandleHover();          // optional hover tooltip
+
+        HandleHover();
         AutoMove();
     }
 
@@ -113,8 +125,8 @@ public class PlayerController_Stable : MonoBehaviour
     {
         Transform target = null;
         bool shouldAutoMove = false;
-        
-        // Xác định target dựa trên loại auto move (ưu tiên theo thứ tự: Plant > NhanSo > Animal)
+
+
         if (isPlant && targetPlant != null)
         {
             target = targetPlant;
@@ -130,76 +142,105 @@ public class PlayerController_Stable : MonoBehaviour
             target = targetAnimal;
             shouldAutoMove = true;
         }
-        
+
         if (shouldAutoMove && agent != null && target != null)
         {
-            // Disable CharacterController để NavMeshAgent có thể tự động di chuyển
+
             if (cc != null && cc.enabled)
             {
                 cc.enabled = false;
             }
-            
-            // Đảm bảo NavMeshAgent được enable
+
+
             if (!agent.enabled)
             {
                 agent.enabled = true;
             }
-            
-            // Kiểm tra xem agent có ở trên NavMesh không
+
+
             if (!agent.isOnNavMesh)
             {
                 Debug.LogWarning("NavMeshAgent không ở trên NavMesh! Vui lòng đảm bảo có NavMesh trong scene và nhân vật đang ở trên NavMesh.");
                 return;
             }
-            
-            // Kiểm tra nếu target thay đổi - reset các flag và cho phép di chuyển
+
+
             if (currentTarget != target)
             {
                 currentTarget = target;
                 hasShownTooltips = false;
                 lastTargetWithTooltips = target;
-                // Reset isStopped để agent có thể di chuyển đến target mới
+
                 agent.isStopped = false;
             }
-            
-            // Đặt đích đến - NavMeshAgent sẽ tự động di chuyển đến đó
-            agent.SetDestination(target.position);
-            
-            // Kiểm tra xem đã đến đích chưa
-            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + 0.1f)
+
+            // Kiểm tra xem đã đến target chưa
+            // Chỉ coi là đã đến target nếu đã có path và remainingDistance hợp lệ
+            bool hasReachedTarget = !agent.pathPending && 
+                                    agent.remainingDistance != Mathf.Infinity && 
+                                    agent.remainingDistance <= agent.stoppingDistance &&
+                                    hasShownTooltips; // Chỉ dừng nếu đã hiển thị tooltip (đảm bảo đã thực sự đến target)
+
+            if (hasReachedTarget)
             {
-                // Đã đến đích - dừng agent
-                agent.isStopped = true;
-                
-                // Quay về phía target
-                Vector3 direction = (target.position - transform.position);
-                direction.y = 0;
-                if (direction.magnitude > 0.1f)
+                // Đã đến target - dừng di chuyển và rotation
+                if (!agent.isStopped)
                 {
-                    Quaternion targetRotation = Quaternion.LookRotation(direction);
-                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                    agent.isStopped = true;
+                    UIController.instance.bottomPanel.SetActive(true);
+                    
+                    // Set camera khi đến target
+                    if (!hasSetCamera && cameraRoot != null)
+                    {
+                        StartCameraTransition();
+                        hasSetCamera = true;
+                    }
                 }
                 
-                // Hiển thị tooltip cho tất cả child objects (chỉ một lần)
-                if (!hasShownTooltips && UIController.instance != null)
+                // Tiếp tục transition camera nếu đang trong quá trình
+                if (isTransitioningCamera && cameraRoot != null)
                 {
-                    UIController.instance.ShowTooltipsForChildren(target);
-                    hasShownTooltips = true;
+                    UpdateCameraTransition();
                 }
+                
+                // Không gọi SetDestination và LookRotation nữa khi đã đến target
             }
             else
             {
-                // Đang di chuyển - quay mượt mà về phía target
-                Vector3 direction = (target.position - transform.position);
-                direction.y = 0; // Chỉ quay theo trục Y (ngang)
-                if (direction.magnitude > 0.1f)
+                // Chưa đến target - tiếp tục di chuyển và rotation
+                if (agent.isStopped)
                 {
-                    Quaternion targetRotation = Quaternion.LookRotation(direction);
-                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                    agent.isStopped = false;
+                }
+
+                agent.SetDestination(target.position);
+
+                // Kiểm tra xem đã đến target chưa (sau khi set destination)
+                if (!agent.pathPending && 
+                    agent.remainingDistance != Mathf.Infinity && 
+                    agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    // Đã đến target - hiển thị tooltip navigation
+                    if (!hasShownTooltips && UIController.instance != null)
+                    {
+                        UIController.instance.StartTooltipNavigation(target);
+                        hasShownTooltips = true;
+                    }
+                }
+                else
+                {
+                    // Chưa đến - tiếp tục rotation
+                    Vector3 direction = (target.position - transform.position);
+                    direction.y = 0;
+                    if (direction.magnitude > 0.1f)
+                    {
+                        Quaternion targetRotation = Quaternion.LookRotation(direction);
+                        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                    }
                 }
             }
-            
-            // Ẩn joystick khi đang auto move
+
+
             if (moveJoystick != null && moveJoystick.gameObject.activeSelf)
             {
                 moveJoystick.gameObject.SetActive(false);
@@ -207,30 +248,93 @@ public class PlayerController_Stable : MonoBehaviour
         }
         else
         {
-            // Khi không phải chế độ auto move, enable CharacterController và disable NavMeshAgent
-            if (cc != null && !cc.enabled)
+            // Khi không có auto move, đảm bảo agent vẫn enable để HandleMove() có thể dùng
+            // CharacterController vẫn disable vì chúng ta dùng agent cho joystick
+            if (cc != null && cc.enabled)
             {
-                cc.enabled = true;
+                cc.enabled = false;
             }
-            
-            if (agent != null && agent.enabled)
+
+            // Đảm bảo agent được enable để HandleMove() có thể sử dụng
+            if (agent != null && !agent.enabled)
             {
-                agent.enabled = false;
+                agent.enabled = true;
             }
-            
-            // Reset flag khi không còn auto move
+
+            // Dừng agent nếu đang di chuyển đến target cũ
+            if (agent != null && agent.enabled && !agent.isStopped)
+            {
+                agent.isStopped = true;
+            }
+
             hasShownTooltips = false;
             lastTargetWithTooltips = null;
             currentTarget = null;
+            hasSetCamera = false;
+
+            // Dừng tooltip navigation khi rời khỏi target
+            if (UIController.instance != null)
+            {
+                UIController.instance.StopTooltipNavigation();
+            }
         }
     }
 
-    // =========================
-    // INPUT (Pointer / UI)
-    // =========================
+    // Bắt đầu transition camera đến vị trí mục tiêu
+    void StartCameraTransition()
+    {
+        if (cameraRoot == null) return;
+
+        // Lưu vị trí và rotation ban đầu
+        originalCameraPosition = cameraRoot.localPosition;
+        originalCameraRotation = cameraRoot.localRotation;
+        isTransitioningCamera = true;
+    }
+
+    // Cập nhật camera transition mượt mà
+    void UpdateCameraTransition()
+    {
+        if (cameraRoot == null || !isTransitioningCamera) return;
+
+        // Smooth transition position
+        cameraRoot.localPosition = Vector3.Lerp(
+            cameraRoot.localPosition,
+            targetCameraPosition,
+            cameraTransitionSpeed * Time.deltaTime
+        );
+
+        // Smooth transition rotation
+        Quaternion targetRotation = Quaternion.Euler(targetCameraRotation);
+        cameraRoot.localRotation = Quaternion.Slerp(
+            cameraRoot.localRotation,
+            targetRotation,
+            cameraTransitionSpeed * Time.deltaTime
+        );
+
+        // Cập nhật pitch để giữ sync với rotation
+        pitch = cameraRoot.localEulerAngles.x;
+        if (pitch > 180f) pitch -= 360f;
+
+        // Kiểm tra xem đã đến gần target chưa
+        float positionDistance = Vector3.Distance(cameraRoot.localPosition, targetCameraPosition);
+        float rotationDistance = Quaternion.Angle(cameraRoot.localRotation, targetRotation);
+
+        if (positionDistance < 0.01f && rotationDistance < 0.5f)
+        {
+            // Đã đến target, set chính xác
+            cameraRoot.localPosition = targetCameraPosition;
+            cameraRoot.localRotation = targetRotation;
+            pitch = targetCameraRotation.x;
+            isTransitioningCamera = false;
+        }
+    }
+
+
+
+
     void HandlePointerState()
     {
-        // DOWN
+
         if (Input.GetMouseButtonDown(0))
         {
             pointerDown = true;
@@ -244,7 +348,7 @@ public class PlayerController_Stable : MonoBehaviour
             pointerDownTime = Time.time;
         }
 
-        // DRAG -> start rotating (only if not started on UI and not moving)
+
         if (pointerDown && !pointerStartedOnUI && !rotating && !isMoving)
         {
             float dist = ((Vector2)Input.mousePosition - pointerDownPos).magnitude;
@@ -255,7 +359,7 @@ public class PlayerController_Stable : MonoBehaviour
             }
         }
 
-        // UP
+
         if (Input.GetMouseButtonUp(0))
         {
             if (pointerStartedOnUI)
@@ -266,7 +370,7 @@ public class PlayerController_Stable : MonoBehaviour
                 return;
             }
 
-            // click world (only if not rotating)
+
             if (!rotating && enableWorldClick)
             {
                 float held = Time.time - pointerDownTime;
@@ -297,9 +401,9 @@ public class PlayerController_Stable : MonoBehaviour
 #endif
     }
 
-    // =========================
-    // LOOK (Drag Mouse/Touch)
-    // =========================
+
+
+
     void HandleLook()
     {
         if (!rotating || isMoving) return;
@@ -307,7 +411,7 @@ public class PlayerController_Stable : MonoBehaviour
         float sens = mouseSensitivity;
 
 #if UNITY_WEBGL && !UNITY_EDITOR
-        // WebGL trên mobile thường gắt hơn
+
         sens *= webglMobileSensitivityMul;
 #endif
 
@@ -321,20 +425,47 @@ public class PlayerController_Stable : MonoBehaviour
         if (cameraRoot) cameraRoot.localRotation = Quaternion.Euler(pitch, 0f, 0f);
     }
 
-    // =========================
-    // MOVE
-    // =========================
+
+
+
     void HandleMove()
     {
-        bool grounded = cc.isGrounded;
-        if (grounded && velocity.y < 0f) velocity.y = -2f;
+        // Đảm bảo agent được enable và trên NavMesh
+        if (agent == null) return;
+        
+        // Không di chuyển bằng joystick nếu đang auto move đến target
+        if (isPlant || isNhanSo || isAnimal)
+        {
+            return;
+        }
+        
+        if (!agent.enabled)
+        {
+            agent.enabled = true;
+        }
+        
+        if (!agent.isOnNavMesh)
+        {
+            return;
+        }
+
+        // Đảm bảo CharacterController được disable khi dùng agent
+        if (cc != null && cc.enabled)
+        {
+            cc.enabled = false;
+        }
+
+        // Dừng agent nếu đang có path đến đâu đó
+        if (!agent.isStopped)
+        {
+            agent.isStopped = true;
+            agent.ResetPath();
+        }
 
         Vector2 move = GetMoveInput();
 
-        // Kiểm tra xem có đang di chuyển hay không
         isMoving = move.magnitude > 0.01f;
-        
-        // Nếu đang di chuyển thì dừng rotate
+
         if (isMoving && rotating)
         {
             rotating = false;
@@ -347,13 +478,8 @@ public class PlayerController_Stable : MonoBehaviour
         bool sprint = (!useJoystickOnly && Input.GetKey(KeyCode.LeftShift));
         float speed = moveSpeed * (sprint ? sprintMultiplier : 1f);
 
-        cc.Move(input * speed * Time.deltaTime);
-
-        if (grounded && !useJoystickOnly && Input.GetButtonDown("Jump"))
-            Jump();
-
-        velocity.y += gravity * Time.deltaTime;
-        cc.Move(velocity * Time.deltaTime);
+        // Sử dụng agent.Move() thay vì cc.Move()
+        agent.Move(input * speed * Time.deltaTime);
     }
 
     Vector2 GetMoveInput()
@@ -377,7 +503,7 @@ public class PlayerController_Stable : MonoBehaviour
         return Vector2.ClampMagnitude(v, 1f);
     }
 
-    public void PressJump() // gán vào UI Button OnClick
+    public void PressJump()
     {
         Jump();
     }
@@ -388,15 +514,30 @@ public class PlayerController_Stable : MonoBehaviour
         velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
     }
 
-    // =========================
-    // WORLD CLICK / HOVER
-    // =========================
+
+
+
     void HandleWorldClick()
     {
         if (!cam) return;
         if (IsPointerOverUI()) return;
 
-        // Raycast theo vị trí click ban đầu (ổn định hơn)
+        // Ưu tiên: Nếu đang ở tooltip navigation mode, click vào object hiện tại đang được hiển thị
+        if (UIController.instance != null && UIController.instance.IsNavigatingTooltips())
+        {
+            ClickAble currentClickable = UIController.instance.GetCurrentTooltipClickable();
+            if (currentClickable != null && currentClickable.isValid)
+            {
+                if (UIController.instance.tooltipUI != null)
+                    UIController.instance.tooltipUI.Hide();
+
+                currentHovered = null;
+                currentClickable.OnClicked();
+                return;
+            }
+        }
+
+        // Nếu không ở navigation mode, sử dụng raycast như bình thường
         Ray ray = cam.ScreenPointToRay(pointerDownPos);
         if (Physics.Raycast(ray, out RaycastHit hit, rayDistance, clickableMask, QueryTriggerInteraction.Ignore))
         {
@@ -414,24 +555,35 @@ public class PlayerController_Stable : MonoBehaviour
 
     void HandleHover()
     {
-        if (!enableHover) return;
-        if (!cam) return;
+        if (!enableHover) 
+        {
+            // Debug: enableHover is false
+            return;
+        }
+        if (!cam) 
+        {
+            // Debug: cam is null
+            return;
+        }
 
-        // Mobile thường không hover
-        if (useJoystickOnly) return;
-
-        if (IsPointerOverUI() || rotating)
+        // Chỉ clear hover khi đang rotating
+        if (rotating)
         {
             ClearHover();
             return;
         }
 
+        // Thử raycast trước, nếu hit được object thì không cần kiểm tra UI
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, rayDistance, clickableMask, QueryTriggerInteraction.Ignore))
+        bool hitSomething = Physics.Raycast(ray, out RaycastHit hit, rayDistance, clickableMask, QueryTriggerInteraction.Ignore);
+        
+        if (hitSomething)
         {
             var clickable = hit.collider.GetComponentInParent<IClickable>();
             if (clickable != null)
             {
+                // Kiểm tra UI chỉ khi cần thiết (nếu đang hover vào UI element thực sự)
+                // Nhưng vẫn cho phép hover vào world object
                 if (clickable != currentHovered)
                 {
                     currentHovered = clickable;
@@ -444,13 +596,19 @@ public class PlayerController_Stable : MonoBehaviour
                         UIController.instance != null && UIController.instance.tooltipUI != null)
                     {
                         UIController.instance.tooltipUI.Show(tooltipText, clickable);
+                        Debug.Log("Hovering over: " + tooltipText);
                     }
                 }
                 return;
             }
         }
 
-        ClearHover();
+        // Chỉ clear hover khi không hit được object VÀ không đang ở trên UI
+        // Nếu đang ở trên UI nhưng không hit được object, giữ nguyên hover hiện tại
+        if (!IsPointerOverUI())
+        {
+            ClearHover();
+        }
     }
 
     void ClearHover()
@@ -463,18 +621,18 @@ public class PlayerController_Stable : MonoBehaviour
         }
     }
 
-    // =========================
-    // UI DETECT (no GC)
-    // =========================
+
+
+
     bool IsPointerOverUI()
     {
         if (EventSystem.current == null) return false;
 
-        // mouse quick check
+
         if (EventSystem.current.IsPointerOverGameObject())
             return true;
 
-        // touch check (mobile) - fingerId
+
         if (Input.touchCount > 0)
         {
             int id = Input.GetTouch(0).fingerId;
@@ -490,5 +648,5 @@ public class PlayerController_Stable : MonoBehaviour
         return uiHits.Count > 0;
     }
 
-    
+
 }

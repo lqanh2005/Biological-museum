@@ -1,0 +1,56 @@
+partID,title,optA,optB,optC,optD,correct
+0,Lục lạp thường có mặt ở đâu?,Tế bào vi khuẩn,Tế bào động vật,Tế bào nấm,Tế bào thực vật và một số nguyên sinh vật,D
+0,"Trong lục lạp, các túi dẹt (thylakoid) xếp chồng lên nhau tạo thành cấu trúc gì?",Stroma,Ribosome,Màng kép,Grana,D
+0,Sắc tố chính trong lục lạp giúp hấp thụ ánh sáng là gì?,Xanthophyll,Anthocyanin,Carotenoid,Chlorophyll,D
+0,Loại lạp thể nào dự trữ tinh bột trong rễ và thân củ?,Sắc lạp,Lục lạp,Bột lạp,Không bào,C
+0,Chức năng chính của lục lạp là gì?,Quang hợp,Tổng hợp protein,Dự trữ lipid,Hô hấp tế bào,A
+1,Thành tế bào bao quanh màng sinh chất chỉ có ở đâu?,Tế bào động vật,Tế bào vi khuẩn,Tế bào thực vật và nấm,Tế bào nguyên sinh chất,C
+1,Thành tế bào thực vật được cấu tạo chủ yếu từ chất nào?,Chitin,Cellulose,Protein,Lipid,B
+1,Thành tế bào của nấm có thành phần chính là gì?,Pectin,Cellulose,Chitin,Protein,C
+1,Giữa thành của hai tế bào có cấu trúc nào giúp liên kết chúng lại với nhau?,Cầu sinh chất,Phiến giữa,Màng sinh chất,Lục lạp,B
+1,Chức năng chính của thành tế bào là gì?,Tổng hợp protein,"Bảo vệ, cố định hình dạng và điều chỉnh lượng nước",Dự trữ năng lượng,Thực hiện quang hợp,B
+2,Ribosome có đặc điểm cấu tạo nào sau đây?,Có màng bao bọc,"Không có màng bao bọc, dạng hình cầu",Chỉ có ở tế bào nhân sơ,Chỉ có ở ti thể,B
+2,Thành phần hóa học chủ yếu của ribosome là gì?,DNA và protein,rRNA và protein,Lipid và protein,Polysaccharide và protein,B
+2,Ribosome của tế bào nhân thực gồm hai tiểu đơn vị nào?,30S và 50S,40S và 60S,20S và 40S,70S và 80S,B
+2,Ribosome có thể phân bố ở đâu trong tế bào?,Chỉ trong nhân tế bào,"Trên màng nhân, lưới nội chất hoặc tự do",Chỉ trong lục lạp,Chỉ trong ti thể,B
+2,Chức năng chính của ribosome là gì?,Quang hợp,Tổng hợp protein,Dự trữ năng lượng,Vận chuyển chất,B
+3,Phần lớn nhân tế bào có hình dạng và kích thước như thế nào?,"Hình cầu, đường kính khoảng 5 µm","Hình trụ, đường kính khoảng 10 µm","Hình lập phương, đường kính khoảng 2 µm","Hình bầu dục, đường kính khoảng 1 µm",A
+3,Lớp bao bọc nhân tế bào được cấu tạo bởi gì?,Lớp đơn lipid,Lớp kép phospholipid và protein,Lớp polysaccharide,Lớp chitin,B
+3,Chất nhân (dịch nền của nhân) chứa thành phần nào sau đây?,Chỉ có DNA,"Enzyme, RNA, nucleotide và sợi nhiễm sắc",Chỉ có ribosome,Chỉ có lipid,B
+3,"Trong quá trình phân chia tế bào, sợi nhiễm sắc sẽ biến đổi như thế nào?",Kéo dài thành sợi mảnh,Co ngắn thành nhiễm sắc thể,Biến mất hoàn toàn,Tách thành ribosome,B
+3,Chức năng chính của nhân tế bào là gì?,Tổng hợp lipid,Dự trữ năng lượng,Trung tâm điều khiển các hoạt động sống,Vận chuyển chất dinh dưỡng,C
+4,Ti thể có đặc điểm cấu tạo nào sau đây?,Có màng đơn,"Có màng kép, dài khoảng 0,5 – 10 µm",Không có màng,Chỉ có một lớp màng ngoài,B
+4,Màng trong của ti thể có đặc điểm gì?,"Trơn nhẵn, không gấp nếp",Gấp nếp hình răng lược tạo thành mào,Chỉ chứa DNA,Không có enzyme,B
+4,Khoang ngoài của ti thể chứa gì quan trọng cho tổng hợp ATP?,Enzyme hô hấp,Ion H⁺,DNA vòng,Ribosome,B
+4,Trong chất nền của ti thể có thành phần nào sau đây?,Chỉ có lipid,"DNA vòng, ribosome và enzyme hô hấp",Chỉ có RNA,Chỉ có protein,B
+4,Chức năng chính của ti thể là gì?,Quang hợp,Tổng hợp protein,"Nhà máy năng lượng, thực hiện hô hấp tế bào",Dự trữ tinh bột,C
+5,Lưới nội chất nối trực tiếp với cấu trúc nào trong tế bào?,Màng tế bào,Bộ máy Golgi,Ti thể,Màng ngoài của nhân,D
+5,Lưới nội chất hạt có đặc điểm gì nổi bật?,Không có ribosome,"Có ribosome bám trên màng, tổng hợp protein",Chỉ tổng hợp lipid,Chỉ dự trữ Ca²,B
+5,Lưới nội chất trơn có chức năng nào sau đây?,Tổng hợp protein,"Tổng hợp lipid, chuyển hoá đường, khử độc, dự trữ Ca²",Tổng hợp DNA,Vận chuyển RNA,B
+5,Sản phẩm protein từ lưới nội chất hạt thường được vận chuyển đến đâu?,Nhân tế bào,Ti thể,Bộ máy Golgi,Lục lạp,C
+5,"Ngoài tổng hợp lipid, lưới nội chất trơn còn tham gia vào quá trình nào?",Tổng hợp và phân giải glycogen,Quang hợp,Tổng hợp ATP,Phân chia tế bào,A
+6,Không bào trung tâm thực vật có đặc điểm nào sau đây?,Có nhiều ribosome,"Nằm giữa tế bào, kích thước lớn và tồn tại lâu dài",Chỉ có ở tế bào động vật,Không chứa nước,B
+6,Chức năng nào giúp duy trì sự ổn định của tế bào thực vật?,Tổng hợp protein,Quang hợp,Vận chuyển electron,Điều hoà áp suất thẩm thấu,D
+6,Chức năng nào sau đây KHÔNG phải của không bào?,Điều hoà áp suất thẩm thấu,Tổng hợp protein,Chứa chất thải hoặc sắc tố,Dự trữ muối khoáng và đường,B
+6,"Không bào ở lá, hoa, quả chứa sắc tố nhằm mục đích gì?",Thu hút côn trùng thụ phấn và phát tán hạt,Tăng cường quang hợp,Giúp tế bào phân chia nhanh hơn,Tăng khả năng hô hấp,A
+6,Thành phần nào sau đây có thể được tìm thấy trong không bào?,DNA dạng vòng,Enzyme thuỷ phân đại phân tử sinh học,Ribosome 70S,Màng kép phospholipid,B
+7,Peroxisome có đặc điểm cấu tạo nào sau đây?,"Có màng kép, dạng hình cầu","Có màng đơn mỏng, dạng hình cầu",Không có màng bao bọc,Chỉ có ở tế bào động vật,B
+7,Enzyme trong peroxisome có vai trò gì?,Chuyển H từ các chất độc đến O2 tạo H2O2,Tổng hợp protein từ ribosome,Tổng hợp ATP trực tiếp,Vận chuyển electron,A
+7,H2O2 được xử lý như thế nào trong peroxisome?,B bị phân giải thành nước và oxygen,Được chuyển thành glucose,Được dự trữ trong không bào,Được biến đổi thành DNA,A
+7,"Ở thực vật, glioxysome có chức năng đặc biệt gì?",Tổng hợp chlorophyll,Phân tách acid béo thành acetyl-CoA,Tổng hợp RNA,Dự trữ tinh bột,B
+7,Chức năng chính của peroxisome là gì?,Quang hợp và tổng hợp đường,Phân giải H2O2 và chuyển hoá lipid,Tổng hợp protein và enzyme,Dự trữ muối khoáng,B
+8,Bộ máy Golgi có đặc điểm cấu tạo nào sau đây?,Gồm các túi dẹp nằm song song nhưng tách rời,Gồm các hạt ribosome bám trên màng,Gồm các sợi DNA xoắn kép,Gồm các màng kép gấp nếp tạo mào,A
+8,Bộ máy Golgi có cấu trúc phân cực gồm những mặt nào?,Mặt ngoài và mặt trong,Mặt cis (nhập) và mặt trans (xuất),Mặt trên và mặt dưới,Mặt nhân và mặt tế bào chất,B
+8,Chức năng chính của bộ máy Golgi là gì?,Quang hợp và tổng hợp đường,Tổng hợp DNA và RNA,"Sửa đổi, phân loại, đóng gói sản phẩm",Dự trữ tinh bột,C
+8,Sản phẩm được vận chuyển qua Golgi theo hướng nào?,Từ mặt trans đến mặt cis,Từ ribosome đến lục lạp,Từ nhân đến ti thể,Từ mặt cis đến mặt trans,D
+8,Golgi còn tham gia tổng hợp thành phần nào của thành tế bào?,Cellulose,Polysaccharide (trừ cellulose) và chất nền,Protein của ribosome,DNA vòng trong ti thể,B
+9,Chất nguyên sinh của tế bào bao gồm những thành phần nào?,Tế bào chất và nhân,Màng sinh chất và nhân,Ribosome và ti thể,Lưới nội chất và Golgi,A
+9,Tế bào chất nằm ở vị trí nào trong tế bào?,Ngoài màng tế bào,Bên trong nhân,Giữa màng sinh chất và nhân,Giữa ti thể và lục lạp,C
+9,Thành phần nào sau đây có trong bào tương?,DNA và RNA,"Nước, chất vô cơ, enzyme, carbohydrate...",Chỉ có lipid,Chỉ có protein,B
+9,Các bào quan trong tế bào có đặc điểm gì?,Không có cấu trúc đặc trưng,Chỉ có ở tế bào nhân sơ,Chỉ có ở tế bào động vật,Cấu trúc đặc trưng và chức năng nhất định,D
+9,Chức năng chính của chất nguyên sinh là gì?,Dự trữ năng lượng,Nơi diễn ra hầu hết các hoạt động sống,Tổng hợp DNA,Vận chuyển electron,B
+10,Màng sinh chất được cấu tạo chủ yếu từ gì?,Lớp kép phospholipid xen kẽ với protein,Cellulose và chitin,DNA và RNA,Polysaccharide và lipid đơn,A
+10,Cấu trúc “khảm lỏng” của màng sinh chất được tạo bởi gì?,Các phân tử protein xen kẽ trong lớp lipid kép,Các sợi cellulose đan xen,Các phân tử DNA và RNA,Các ribosome bám màng,A
+10,Đuôi kị nước của phospholipid có đặc điểm nào?,Quay ra ngoài,Quay vào nhau ở phía giữa hai lớp,Liên kết trực tiếp với protein,Tạo thành cầu nối với ribosome,B
+10,Các loại protein trong màng sinh chất được sắp xếp thế nào?,Chỉ có protein xuyên màng,Chỉ có protein rìa màng,Chỉ có protein bám màng,"Protein xuyên màng, bám màng và rìa màng",D
+10,Chức năng chính của màng sinh chất là gì?,Quang hợp,"Kiểm soát vận chuyển chất, tương tác tế bào",Tổng hợp DNA và RNA,Dự trữ năng lượng,B

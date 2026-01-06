@@ -6,7 +6,7 @@ using UnityEngine;
 
 public static class CsvLoader
 {
-    // CSV có header: partId,title,optA,optB,optC,optD,correct
+
     public static List<Question> LoadQuestionsFromResources(string path = "quiz", string onlyPartId = null)
     {
         var txt = Resources.Load<TextAsset>(path);
@@ -16,7 +16,7 @@ public static class CsvLoader
         var list = new List<Question>();
         if (lines.Length <= 1) return list;
 
-        for (int i = 1; i < lines.Length; i++) // skip header
+        for (int i = 1; i < lines.Length; i++)
         {
             var line = lines[i].TrimEnd();
             if (string.IsNullOrWhiteSpace(line)) continue;
@@ -25,8 +25,6 @@ public static class CsvLoader
             if (cols.Count < 7) continue;
 
             string partId = cols[0].Trim();
-            if (!string.IsNullOrEmpty(onlyPartId) &&
-                !partId.Equals(onlyPartId, System.StringComparison.OrdinalIgnoreCase)) continue;
 
             var q = new Question
             {
@@ -40,7 +38,7 @@ public static class CsvLoader
         return list;
     }
 
-    // parser CSV có hỗ trợ dấu phẩy trong ""
+
     static List<string> ParseCsvLine(string line)
     {
         var res = new List<string>();
@@ -73,12 +71,12 @@ public class Question
     public string partId;
     public string title;
     public string[] opts = new string[4];
-    public int correct; // 0..3
+    public int correct;
 }
 
 [Serializable]
 public class QuizSet
 {
-    public string partId;               // dùng nếu bạn lọc theo bộ phận
+    public string partId;
     public List<Question> questions = new();
 }

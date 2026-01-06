@@ -7,9 +7,9 @@ public class PopupInfoUI : MonoBehaviour
     public static PopupInfoUI Instance { get; private set; }
 
     [Header("Refs")]
-    public RectTransform panel;   // Panel của popup
-    public Image iconImage;       // Có thể để null nếu không dùng icon
-    public TMP_Text titleText;        // Nếu dùng TextMeshPro: đổi kiểu sang TMP_Text
+    public RectTransform panel;
+    public Image iconImage;
+    public TMP_Text titleText;
     public TMP_Text descText;
 
     [Header("Behavior")]
@@ -62,7 +62,7 @@ public class PopupInfoUI : MonoBehaviour
 
     void Update()
     {
-        // Ấn Esc để đóng
+
         if (panel.gameObject.activeSelf && Input.GetKeyDown(KeyCode.Escape))
             Hide();
     }

@@ -14,17 +14,17 @@ public class TooltipUI : MonoBehaviour
 
 
     [Header("Behavior")]
-    public Vector3 offset = new Vector3(0, 20,0); // Offset từ vị trí chuột (X: ngang, Y: lên trên)
-    public float followSpeed = 10f; // Tốc độ di chuyển tooltip theo chuột (không dùng nữa)
+    public Vector3 offset = new Vector3(0, 20,0);
+    public float followSpeed = 10f;
 
     private Canvas canvas;
     private CanvasGroup cg;
     private IClickable currentHovered;
-    private Transform targetWorldObject; // Object trong world để hiển thị tooltip tại vị trí của nó
-    
-    // Hệ thống quản lý nhiều tooltip instances cho child objects
+    private Transform targetWorldObject;
+
+
     private List<ChildTooltipData> activeChildTooltips = new List<ChildTooltipData>();
-    
+
     [System.Serializable]
     private class ChildTooltipData
     {
@@ -39,29 +39,28 @@ public class TooltipUI : MonoBehaviour
         canvas = GetComponentInParent<Canvas>();
         cg = panel.GetComponent<CanvasGroup>();
         if (!cg) { cg = panel.gameObject.AddComponent<CanvasGroup>(); }
-        
-        // Đảm bảo panel được setup đúng cho Screen Space Overlay
+
+
         if (panel != null && canvas != null)
         {
             RectTransform panelRect = panel;
-            // Đảm bảo panel không bị constraint bởi Layout Group
+
             LayoutGroup layoutGroup = panelRect.GetComponent<LayoutGroup>();
             if (layoutGroup != null)
             {
-                layoutGroup.enabled = false; // Tắt layout group để có thể tự do di chuyển
+                layoutGroup.enabled = false;
             }
-            
-            // Đảm bảo anchor ở center để dùng localPosition
+
             if (panelRect.anchorMin != panelRect.anchorMax || 
                 panelRect.anchorMin != new Vector2(0.5f, 0.5f))
             {
-                // Set anchor về center nếu chưa đúng
+
                 panelRect.anchorMin = new Vector2(0.5f, 0.5f);
                 panelRect.anchorMax = new Vector2(0.5f, 0.5f);
                 panelRect.anchoredPosition = Vector2.zero;
             }
         }
-        
+
         Hide();
     }
 
@@ -71,7 +70,6 @@ public class TooltipUI : MonoBehaviour
         {
             if (targetWorldObject != null)
             {
-                // Cập nhật vị trí dựa trên object (dùng UpdatePositionAtObject thay vì UpdatePositionAtWorldObject)
                 UpdatePositionAtObject(targetWorldObject);
             }
             else
@@ -79,21 +77,13 @@ public class TooltipUI : MonoBehaviour
                 UpdatePosition();
             }
         }
-        
-        // Cập nhật vị trí của tất cả child tooltips
         UpdateAllChildTooltips();
     }
     void LateUpdate()
     {
         if (target == null || !gameObject.activeSelf) return;
-
-        // Chuyển vị trí từ 3D sang 2D màn hình
         Vector3 screenPos = Camera.main.WorldToScreenPoint(target.position);
-
-        // Cập nhật vị trí của Tooltip UI
         transform.position = screenPos + offset;
-
-        // Ẩn nếu bộ phận nằm sau lưng Camera (tránh lỗi hiển thị đè)
         GetComponent<CanvasGroup>().alpha = (screenPos.z > 0) ? 1 : 0;
     }
 
@@ -104,12 +94,10 @@ public class TooltipUI : MonoBehaviour
         currentHovered = clickable;
         if (textTooltip) textTooltip.text = text;
 
-        // Đảm bảo panel được setup đúng trước khi hiển thị
-        // Force rebuild layout để có kích thước chính xác
         Canvas.ForceUpdateCanvases();
-        
+
         cg.alpha = 1f;
-        cg.blocksRaycasts = false; // Không chặn raycast
+        cg.blocksRaycasts = false;
         cg.interactable = false;
         panel.gameObject.SetActive(true);
 
@@ -124,105 +112,83 @@ public class TooltipUI : MonoBehaviour
         cg.blocksRaycasts = false;
         cg.interactable = false;
         panel.gameObject.SetActive(false);
-        
-        // Không ẩn child tooltips ở đây - chúng sẽ được quản lý riêng
-        // Chỉ ẩn khi gọi HideAllChildTooltips() hoặc khi cần thiết
+
     }
-    
-    /// <summary>
-    /// Ẩn tất cả tooltips (cả chính và child tooltips)
-    /// </summary>
+
     public void HideAll()
     {
         Hide();
         HideAllChildTooltips();
     }
-    
-    
-    
-    
-    
-    /// <summary>
-    /// Cập nhật vị trí của tất cả child tooltips
-    /// </summary>
+
     void UpdateAllChildTooltips()
     {
         for (int i = activeChildTooltips.Count - 1; i >= 0; i--)
         {
             ChildTooltipData data = activeChildTooltips[i];
-            
-            // Kiểm tra nếu object đã bị destroy
+
+
             if (data.targetObject == null || data.panel == null)
             {
                 if (data.panel != null) Destroy(data.panel.gameObject);
                 activeChildTooltips.RemoveAt(i);
                 continue;
             }
-            
+
             UpdateChildTooltipPosition(data);
         }
     }
-    
-    /// <summary>
-    /// Cập nhật vị trí của một child tooltip
-    /// </summary>
+
     void UpdateChildTooltipPosition(ChildTooltipData data)
     {
         if (data.panel == null || data.targetObject == null) return;
-        
-        // Lấy camera
+
+
         Camera cam = canvas.worldCamera;
         if (cam == null) cam = Camera.main;
         if (cam == null) return;
-        
-        // Chuyển đổi world position sang screen position
+
+
         Vector3 worldPos = data.targetObject.position;
         Vector3 screenPos = cam.WorldToScreenPoint(worldPos);
-        
-        // Nếu object ở phía sau camera, ẩn tooltip
+
+
         if (screenPos.z < 0)
         {
             data.panel.gameObject.SetActive(false);
             return;
         }
-        
+
         data.panel.gameObject.SetActive(true);
-        
-        // Force update để đảm bảo kích thước chính xác
+
+
         Canvas.ForceUpdateCanvases();
-        
+
         float tooltipHeight = data.panel.rect.height;
         float tooltipWidth = data.panel.rect.width;
-        
-        // Tính toán vị trí tooltip trên màn hình
+
+
         Vector2 tooltipScreenPos = new Vector2(
             screenPos.x + offset.x,
             screenPos.y + offset.y + tooltipHeight
         );
-        
-        // Chuyển đổi từ screen space sang canvas local space
+
         Vector2 localPoint;
         RectTransform canvasRect = canvas.transform as RectTransform;
-        
+
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvasRect,
             tooltipScreenPos,
             cam,
             out localPoint))
         {
-            // Điều chỉnh dựa trên pivot của panel
             Vector2 pivot = data.panel.pivot;
             localPoint.x -= (pivot.x - 0.5f) * tooltipWidth;
             localPoint.y -= (pivot.y - 0.5f) * tooltipHeight;
-            
-            // Set vị trí
             data.panel.localPosition = new Vector3(localPoint.x, localPoint.y, 0);
         }
     }
-    
-    /// <summary>
-    /// Ẩn tất cả child tooltips
-    /// </summary>
+
     void HideAllChildTooltips()
     {
         foreach (var tooltipData in activeChildTooltips)
@@ -234,8 +200,8 @@ public class TooltipUI : MonoBehaviour
         }
         activeChildTooltips.Clear();
     }
-    
-    
+
+
 
     void UpdatePosition()
     {
@@ -243,170 +209,212 @@ public class TooltipUI : MonoBehaviour
 
         Vector2 mousePos = Input.mousePosition;
         RectTransform panelRect = panel;
-        
-        // Force update để đảm bảo kích thước chính xác
         Canvas.ForceUpdateCanvases();
-        
+
         float tooltipHeight = panelRect.rect.height;
         float tooltipWidth = panelRect.rect.width;
-        
-        // Tính toán vị trí tooltip trên màn hình: chuột + offset (bên trên chuột)
         Vector2 tooltipScreenPos = new Vector2(
             mousePos.x + offset.x,
             mousePos.y + offset.y + tooltipHeight
         );
-        
-        // Với Screen Space Overlay, dùng RectTransformUtility để chuyển đổi
-        // Đây là cách Unity khuyến nghị và hoạt động tốt nhất
+
         Vector2 localPoint;
         RectTransform canvasRect = canvas.transform as RectTransform;
-        
-        // Chuyển đổi từ screen space sang canvas local space
-        // Với Screen Space Overlay, camera = null
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvasRect,
             tooltipScreenPos,
-            null, // Screen Space Overlay không cần camera
+            null,
             out localPoint))
         {
-            // Điều chỉnh dựa trên pivot của panel
+
             Vector2 pivot = panelRect.pivot;
             localPoint.x -= (pivot.x - 0.5f) * tooltipWidth;
             localPoint.y -= (pivot.y - 0.5f) * tooltipHeight;
-            
-            // Set vị trí
+
+
             panelRect.localPosition = new Vector3(localPoint.x, localPoint.y, 0);
         }
         else
         {
-            // Fallback: tính toán thủ công nếu API thất bại
+
             RectTransform canvasRectTransform = canvasRect;
             float canvasWidth = canvasRectTransform.rect.width;
             float canvasHeight = canvasRectTransform.rect.height;
-            
+
             if (canvasWidth <= 0) canvasWidth = Screen.width;
             if (canvasHeight <= 0) canvasHeight = Screen.height;
-            
+
             Vector2 calculatedPos = new Vector2(
                 (tooltipScreenPos.x / Screen.width - 0.5f) * canvasWidth,
                 (tooltipScreenPos.y / Screen.height - 0.5f) * canvasHeight
             );
-            
-            // Điều chỉnh pivot
+
+
             Vector2 pivot = panelRect.pivot;
             calculatedPos.x -= (pivot.x - 0.5f) * tooltipWidth;
             calculatedPos.y -= (pivot.y - 0.5f) * tooltipHeight;
-            
+
             panelRect.localPosition = new Vector3(calculatedPos.x, calculatedPos.y, 0);
         }
-        
-        // Đảm bảo tooltip không ra ngoài màn hình (tùy chọn)
-        // Có thể bỏ qua phần này nếu muốn tooltip luôn theo chuột
     }
     public void Show(ClickAble gameObject, IClickable clickable = null)
     {
-        if (gameObject == null) return;
+        if (gameObject == null || !gameObject.isValid) return;
 
         currentHovered = clickable;
         if (textTooltip) textTooltip.text = gameObject.title;
 
-        // Lưu lại target object để cập nhật vị trí mỗi frame
+
         targetWorldObject = gameObject.transform;
 
-        // Đảm bảo panel được setup đúng trước khi hiển thị
-        // Force rebuild layout để có kích thước chính xác
+
+
         Canvas.ForceUpdateCanvases();
 
         cg.alpha = 1f;
-        cg.blocksRaycasts = false; // Không chặn raycast
+        cg.blocksRaycasts = false;
         cg.interactable = false;
         panel.gameObject.SetActive(true);
 
         UpdatePositionAtObject(gameObject.transform);
     }
-    /// <summary>
-    /// Cập nhật vị trí tooltip dựa trên vị trí của một object thay vì chuột
-    /// </summary>
-    /// <param name="targetObject">Transform của object cần hiển thị tooltip tại vị trí của nó</param>
+
     void UpdatePositionAtObject(Transform targetObject)
     {
         if (!canvas || !panel || targetObject == null) return;
 
-        // Lấy camera (có thể là Camera.main hoặc camera từ canvas)
+        // Xác định camera chính xác
         Camera cam = canvas.worldCamera;
         if (cam == null) cam = Camera.main;
         if (cam == null) return;
 
+        // Tính toán world position chính xác của child object
+        Vector3 worldPos = GetAccurateWorldPosition(targetObject);
+
         // Chuyển đổi world position sang screen position
-        Vector3 worldPos = targetObject.position;
         Vector3 screenPos = cam.WorldToScreenPoint(worldPos);
-        
-        // Nếu object ở phía sau camera, không cập nhật vị trí
+
+        // Kiểm tra object có ở phía trước camera không
         if (screenPos.z < 0)
         {
+            panel.gameObject.SetActive(false);
             return;
         }
 
+        panel.gameObject.SetActive(true);
+
         RectTransform panelRect = panel;
-        
-        // Force update để đảm bảo kích thước chính xác
         Canvas.ForceUpdateCanvases();
-        
+
         float tooltipHeight = panelRect.rect.height;
         float tooltipWidth = panelRect.rect.width;
-        
-        // Tính toán vị trí tooltip trên màn hình: vị trí object + offset (bên trên object)
+
+        // Tính toán screen position cho tooltip (thêm offset)
         Vector2 tooltipScreenPos = new Vector2(
             screenPos.x + offset.x,
             screenPos.y + offset.y + tooltipHeight
         );
-        
-        // Với Screen Space Overlay, dùng RectTransformUtility để chuyển đổi
-        // Đây là cách Unity khuyến nghị và hoạt động tốt nhất
-        Vector2 localPoint;
+
+        // Chuyển đổi screen position sang local position trong canvas
         RectTransform canvasRect = canvas.transform as RectTransform;
-        
-        // Chuyển đổi từ screen space sang canvas local space
-        // Với Screen Space Overlay, camera = null; với các loại canvas khác, cần camera
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            canvasRect,
-            tooltipScreenPos,
-            cam, // null cho Screen Space Overlay, camera cho các trường hợp khác
-            out localPoint))
+        Vector2 localPoint;
+
+        // Xử lý theo render mode của canvas
+        if (canvas.renderMode == RenderMode.ScreenSpaceOverlay)
         {
-            // Điều chỉnh dựa trên pivot của panel
-            Vector2 pivot = panelRect.pivot;
-            localPoint.x -= (pivot.x - 0.5f) * tooltipWidth;
-            localPoint.y -= (pivot.y - 0.5f) * tooltipHeight;
-            
-            // Set vị trí
-            panelRect.localPosition = new Vector3(localPoint.x, localPoint.y, 0);
+            // Screen Space - Overlay: không cần camera
+            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                canvasRect,
+                tooltipScreenPos,
+                null,
+                out localPoint))
+            {
+                // Điều chỉnh theo pivot
+                Vector2 pivot = panelRect.pivot;
+                localPoint.x -= (pivot.x - 0.5f) * tooltipWidth;
+                localPoint.y -= (pivot.y - 0.5f) * tooltipHeight;
+                panelRect.localPosition = new Vector3(localPoint.x, localPoint.y, 0);
+            }
+            else
+            {
+                // Fallback: tính toán thủ công
+                float canvasWidth = canvasRect.rect.width;
+                float canvasHeight = canvasRect.rect.height;
+                if (canvasWidth <= 0) canvasWidth = Screen.width;
+                if (canvasHeight <= 0) canvasHeight = Screen.height;
+
+                Vector2 calculatedPos = new Vector2(
+                    (tooltipScreenPos.x / Screen.width - 0.5f) * canvasWidth,
+                    (tooltipScreenPos.y / Screen.height - 0.5f) * canvasHeight
+                );
+
+                Vector2 pivot = panelRect.pivot;
+                calculatedPos.x -= (pivot.x - 0.5f) * tooltipWidth;
+                calculatedPos.y -= (pivot.y - 0.5f) * tooltipHeight;
+                panelRect.localPosition = new Vector3(calculatedPos.x, calculatedPos.y, 0);
+            }
         }
         else
         {
-            // Fallback: tính toán thủ công nếu API thất bại
-            RectTransform canvasRectTransform = canvasRect;
-            float canvasWidth = canvasRectTransform.rect.width;
-            float canvasHeight = canvasRectTransform.rect.height;
-            
-            if (canvasWidth <= 0) canvasWidth = Screen.width;
-            if (canvasHeight <= 0) canvasHeight = Screen.height;
-            
-            Vector2 calculatedPos = new Vector2(
-                (tooltipScreenPos.x / Screen.width - 0.5f) * canvasWidth,
-                (tooltipScreenPos.y / Screen.height - 0.5f) * canvasHeight
-            );
-            
-            // Điều chỉnh pivot
-            Vector2 pivot = panelRect.pivot;
-            calculatedPos.x -= (pivot.x - 0.5f) * tooltipWidth;
-            calculatedPos.y -= (pivot.y - 0.5f) * tooltipHeight;
-            
-            panelRect.localPosition = new Vector3(calculatedPos.x, calculatedPos.y, 0);
+            // Screen Space - Camera hoặc World Space: cần camera
+            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                canvasRect,
+                tooltipScreenPos,
+                cam,
+                out localPoint))
+            {
+                // Điều chỉnh theo pivot
+                Vector2 pivot = panelRect.pivot;
+                localPoint.x -= (pivot.x - 0.5f) * tooltipWidth;
+                localPoint.y -= (pivot.y - 0.5f) * tooltipHeight;
+                panelRect.localPosition = new Vector3(localPoint.x, localPoint.y, 0);
+            }
         }
-        
-        // Đảm bảo tooltip không ra ngoài màn hình (tùy chọn)
-        // Có thể bỏ qua phần này nếu muốn tooltip luôn theo object
+    }
+
+    // Tính toán world position chính xác của object
+    Vector3 GetAccurateWorldPosition(Transform targetObject)
+    {
+        if (targetObject == null) return Vector3.zero;
+
+        // Thử lấy Renderer để tính toán bounds chính xác
+        Renderer renderer = targetObject.GetComponent<Renderer>();
+        if (renderer != null && renderer.bounds.size != Vector3.zero)
+        {
+            // Sử dụng top center của bounds để tooltip hiển thị phía trên object
+            Bounds bounds = renderer.bounds;
+            return new Vector3(
+                bounds.center.x,
+                bounds.max.y, // Top của object
+                bounds.center.z
+            );
+        }
+
+        // Nếu không có Renderer, thử tìm trong children
+        Renderer[] childRenderers = targetObject.GetComponentsInChildren<Renderer>();
+        if (childRenderers != null && childRenderers.Length > 0)
+        {
+            Bounds combinedBounds = childRenderers[0].bounds;
+            for (int i = 1; i < childRenderers.Length; i++)
+            {
+                if (childRenderers[i].bounds.size != Vector3.zero)
+                {
+                    combinedBounds.Encapsulate(childRenderers[i].bounds);
+                }
+            }
+            
+            if (combinedBounds.size != Vector3.zero)
+            {
+                return new Vector3(
+                    combinedBounds.center.x,
+                    combinedBounds.max.y, // Top của combined bounds
+                    combinedBounds.center.z
+                );
+            }
+        }
+
+        // Fallback: sử dụng position của transform
+        return targetObject.position;
     }
 
     public bool IsShowing(IClickable clickable)

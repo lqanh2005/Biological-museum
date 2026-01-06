@@ -18,6 +18,6 @@ public class LeftItem : MonoBehaviour
     }
     public void Bind()
     {
-        //this.background.color = selectColor;
+
     }
 }
