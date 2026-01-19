@@ -23,9 +23,9 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1.4
+  m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 1, g: 1, b: 1, a: 1}
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -96,8 +96,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 8efd56ef676f8ac4696c06b3206bfb1d, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: c927862590e219443bdabab719aad324, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3600,100 +3600,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &705507993
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 705507995}
-  - component: {fileID: 705507994}
-  m_Layer: 0
-  m_Name: Directional Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!108 &705507994
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 705507993}
-  m_Enabled: 1
-  serializedVersion: 10
-  m_Type: 1
-  m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 1
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 1
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 5.76
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
-  m_ShadowAngle: 9.7
---- !u!4 &705507995
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 705507993}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.710224, y: -0, z: -0, w: 0.7039759}
-  m_LocalPosition: {x: 0.79, y: 5.3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90.505005, y: 0, z: 0}
 --- !u!1 &713095111
 GameObject:
   m_ObjectHideFlags: 0
@@ -5134,6 +5040,7 @@ MonoBehaviour:
   - {fileID: 4132622289112612638}
   - {fileID: 731915862994513889}
   - {fileID: 4435950285359912772}
+  - {fileID: 4132622289112612638}
   isNhanSo: 0
   targetNhanSo: {fileID: 6353481908543552314}
   listNhanSo:
@@ -5203,7 +5110,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: -2762773920411676486, guid: 85304087b7f7e61489b5a551314b341b, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8984,6 +8891,8 @@ GameObject:
   - component: {fileID: 1690047495}
   - component: {fileID: 1690047494}
   - component: {fileID: 1690047498}
+  - component: {fileID: 1690047499}
+  - component: {fileID: 1690047500}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -9109,6 +9018,91 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: cee29622acc7f9d4489b01d6640017cf, type: 2}
   m_BuildHeightMesh: 0
+--- !u!108 &1690047499
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690047493}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 2
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!114 &1690047500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690047493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &1702829727
 GameObject:
   m_ObjectHideFlags: 0
@@ -14388,6 +14382,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -14400,7 +14396,7 @@ Transform:
   m_GameObject: {fileID: 7514735776870528164}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.001397221, y: 0.028076002, z: -0.011198354}
+  m_LocalPosition: {x: -0.001397221, y: 0.02432, z: -0.01124}
   m_LocalScale: {x: 0.5818096, y: 0.5818096, z: 0.5818096}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14784,7 +14780,7 @@ Transform:
   m_GameObject: {fileID: 6966671545756601127}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0016510428, y: 0.033176344, z: -0.013232666}
+  m_LocalPosition: {x: -0.0016510428, y: 0.03027, z: -0.01323}
   m_LocalScale: {x: 0.6875022, y: 0.6875022, z: 0.6875022}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15076,6 +15072,7 @@ GameObject:
   - component: {fileID: 8663590634479986772}
   - component: {fileID: 109335729532742375}
   - component: {fileID: 4954442042411871503}
+  - component: {fileID: 8663590634479986773}
   m_Layer: 0
   m_Name: TV_Ribosomes
   m_TagString: Untagged
@@ -15218,6 +15215,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -15447,6 +15446,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -15498,6 +15499,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -16051,6 +16054,11 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 1
+  blinkChildList:
+  - {fileID: 4429626655538358850}
+  - {fileID: 8314658240137999758}
+  - {fileID: 8220321985761599239}
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -16092,10 +16100,12 @@ MonoBehaviour:
   pathType: 2
   partId: 
   icon: {fileID: 21300000, guid: 1e170620a1525b14aba8de58109c6c8c, type: 3}
-  isValid: 1
+  isValid: 0
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -16181,6 +16191,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -16990,7 +17002,7 @@ Transform:
   m_GameObject: {fileID: 152333163192139807}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.001397221, y: 0.028076002, z: -0.012709879}
+  m_LocalPosition: {x: -0.001397221, y: 0.02517, z: -0.01271}
   m_LocalScale: {x: 0.5818096, y: 0.5818096, z: 0.5818096}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17017,6 +17029,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -17029,7 +17043,7 @@ Transform:
   m_GameObject: {fileID: 6199567493901657154}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.001397221, y: 0.028076002, z: -0.011198354}
+  m_LocalPosition: {x: -0.001397221, y: 0.02517, z: -0.0112}
   m_LocalScale: {x: 0.5818096, y: 0.5818096, z: 0.5818096}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17286,7 +17300,7 @@ Transform:
   m_GameObject: {fileID: 935548439706055776}
   serializedVersion: 2
   m_LocalRotation: {x: 0.32328942, y: -0.024290206, z: -0.5801948, w: -0.74717337}
-  m_LocalPosition: {x: -0.0007575667, y: 0.0024456813, z: -0.0019225049}
+  m_LocalPosition: {x: -0.0007575667, y: -0.00046, z: -0.00192}
   m_LocalScale: {x: 0.035929147, y: 0.024875188, z: 0.14694978}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17580,7 +17594,7 @@ Transform:
   m_GameObject: {fileID: 2911272095889708947}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.001397221, y: 0.028076002, z: -0.011198354}
+  m_LocalPosition: {x: -0.001397221, y: 0.02517, z: -0.0112}
   m_LocalScale: {x: 0.5818096, y: 0.5818096, z: 0.5818096}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18055,10 +18069,13 @@ MonoBehaviour:
   pathType: 2
   partId: 
   icon: {fileID: 21300000, guid: 1e170620a1525b14aba8de58109c6c8c, type: 3}
-  isValid: 0
+  isValid: 1
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList:
+  - {fileID: 6767006239804871259}
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -18071,7 +18088,7 @@ Transform:
   m_GameObject: {fileID: 7493846764484925773}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.001397221, y: 0.028076002, z: -0.011198354}
+  m_LocalPosition: {x: -0.001397221, y: 0.02432, z: -0.01124}
   m_LocalScale: {x: 0.5818096, y: 0.5818096, z: 0.5818096}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18123,6 +18140,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -18366,6 +18385,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -18378,7 +18399,7 @@ Transform:
   m_GameObject: {fileID: 5924345742098318821}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.001397221, y: 0.028076002, z: -0.011198354}
+  m_LocalPosition: {x: -0.001397221, y: 0.02517, z: -0.0112}
   m_LocalScale: {x: 0.5818096, y: 0.5818096, z: 0.5818096}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18408,6 +18429,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -18609,10 +18632,12 @@ MonoBehaviour:
   pathType: 1
   partId: 
   icon: {fileID: 0}
-  isValid: 1
+  isValid: 0
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -18702,7 +18727,7 @@ Transform:
   m_GameObject: {fileID: 9156437263512180270}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.001397221, y: 0.028076002, z: -0.011198354}
+  m_LocalPosition: {x: -0.001397221, y: 0.02517, z: -0.0112}
   m_LocalScale: {x: 0.5818096, y: 0.5818096, z: 0.5818096}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18877,6 +18902,10 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 1
+  blinkChildList:
+  - {fileID: 8355393577119589386}
+  - {fileID: 6938123922191608707}
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -18910,6 +18939,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -18985,6 +19016,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -19255,6 +19288,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -19301,6 +19336,10 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 1
+  blinkChildList:
+  - {fileID: 9067374363239783756}
+  - {fileID: 7514735776870528165}
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -19347,6 +19386,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -19485,6 +19526,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -19864,6 +19907,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -19949,6 +19994,9 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 1
+  blinkChildList:
+  - {fileID: 7766940651495139806}
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -19991,6 +20039,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -20089,6 +20139,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -20142,6 +20194,16 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 1
+  blinkChildList:
+  - {fileID: 6786399844745991500}
+  - {fileID: 8257420577150704216}
+  - {fileID: 9196321420927259188}
+  - {fileID: 3658404670347302612}
+  - {fileID: 9200275796846213225}
+  - {fileID: 4427066708190164160}
+  - {fileID: 8843236833108707420}
+  - {fileID: 8623707705359070966}
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -20271,7 +20333,7 @@ Transform:
   m_GameObject: {fileID: 8900792321368164260}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.001397221, y: 0.028076002, z: -0.011198354}
+  m_LocalPosition: {x: -0.001397221, y: 0.02517, z: -0.0112}
   m_LocalScale: {x: 0.5818096, y: 0.5818096, z: 0.5818096}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20312,7 +20374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed892f9d2e438e42ae2ec9c9030c81e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "M\xE0ng sinh ch\u1EA5t"
+  title: "T\u1EBF b\xE0o ch\u1EA5t"
   description: "M\xE0ng sinh ch\u1EA5t l\xE0 c\u1EA5u tr\xFAc bao b\u1ECDc, b\u1EA3o
     v\u1EC7 v\xE0 ng\u0103n c\xE1ch to\xE0n b\u1ED9 n\u1ED9i dung b\xEAn trong t\u1EBF
     b\xE0o v\u1EDBi m\xF4i tr\u01B0\u1EDDng ngo\u1EA1i b\xE0o. M\xE0ng \u0111\u01B0\u1EE3c
@@ -20336,6 +20398,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -20359,7 +20423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed892f9d2e438e42ae2ec9c9030c81e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Gogil
+  title: "B\u1ED9 m\xE1y Golgi"
   description: "G\u1ED3m h\u1EC7 th\u1ED1ng c\xE1c t\xFAi d\u1EB9t n\u1EB1m song
     song nh\u01B0ng t\xE1ch r\u1EDDi nhau, c\xF3 c\u1EA5u tr\xFAc ph\xE2n c\u1EF1c
     v\u1EDBi m\u1EB7t nh\u1EADp (cis) \u0111\u1EC3 ti\u1EBFp nh\u1EADn v\xE0 m\u1EB7t
@@ -20378,6 +20442,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -20506,6 +20572,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -20675,6 +20743,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -20740,6 +20810,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -20825,6 +20897,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -20880,6 +20954,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -20892,7 +20968,7 @@ Transform:
   m_GameObject: {fileID: 7196685995428270894}
   serializedVersion: 2
   m_LocalRotation: {x: -0.10749334, y: -0.11669035, z: -0.019355228, w: 0.98714435}
-  m_LocalPosition: {x: -0.0015716085, y: -0.0020426584, z: -0.00007319927}
+  m_LocalPosition: {x: -0.0015716085, y: -0.00495, z: -0.00007}
   m_LocalScale: {x: 0.14376225, y: 0.14376223, z: 0.14376223}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20962,6 +21038,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -21166,6 +21244,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -21298,6 +21378,9 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 1
+  blinkChildList:
+  - {fileID: 9105749613695918765}
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -21332,7 +21415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed892f9d2e438e42ae2ec9c9030c81e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: gogil
+  title: "B\u1ED9 m\xE1y Golgi"
   description: "L\xE0 b\xE0o quan kh\xF4ng c\xF3 m\xE0ng, n\u01A1i di\u1EC5n ra t\u1ED5ng
     h\u1EE3p protein. K\xEDch th\u01B0\u1EDBc: eukaryotic ribosome ~25\u201330 nm
     \u0111\u01B0\u1EDDng k\xEDnh (k\xFD hi\u1EC7u 80S; g\u1ED3m 2 ti\u1EC3u ph\u1EA7n
@@ -21352,6 +21435,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -21370,6 +21455,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2615595087290377297}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: -187.895}
+--- !u!114 &8663590634479986773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4132622289112612638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ed892f9d2e438e42ae2ec9c9030c81e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Ribosomes
+  description: "l\xE0 b\xE0o quan kh\xF4ng c\xF3 m\xE0ng bao b\u1ECDc, c\u1EA5u t\u1EA1o
+    t\u1EEB rRNA v\xE0 protein, g\u1ED3m hai ti\u1EC3u \u0111\u01A1n v\u1ECB (l\u1EDBn
+    v\xE0 b\xE9) k\u1EBFt h\u1EE3p l\u1EA1i. V\u1EDBi \u0111\u01B0\u1EDDng k\xEDnh
+    si\xEAu nh\u1ECF kho\u1EA3ng 150 \xB5m, ch\xFAng t\u1ED3n t\u1EA1i t\u1EF1 do
+    trong t\u1EBF b\xE0o ch\u1EA5t, \u0111\xEDnh tr\xEAn m\xE0ng nh\xE2n, l\u01B0\u1EDBi
+    n\u1ED9i ch\u1EA5t h\u1EA1t ho\u1EB7c n\u1EB1m trong ti th\u1EC3, l\u1EE5c l\u1EA1p.
+    \u0110\xF3ng vai tr\xF2 l\xE0 \"nh\xE0 m\xE1y\" t\u1ED5ng h\u1EE3p protein, ribosome
+    c\xF3 s\u1ED1 l\u01B0\u1EE3ng c\u1EF1c l\u1EDBn \u1EDF nh\u1EEFng t\u1EBF b\xE0o
+    c\xF3 ho\u1EA1t \u0111\u1ED9ng chuy\u1EC3n h\xF3a m\u1EA1nh nh\u01B0 t\u1EBF
+    b\xE0o tuy\u1EBFn t\u1EE5y."
+  pathType: 2
+  partId: 
+  icon: {fileID: 21300000, guid: 62c7979630ff2454fb1f4870ab81c4b5, type: 3}
+  isValid: 1
+  spacing: 1
+  sortFromTop: 1
+  startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
+  blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  blinkSpeed: 2
+  blinkIntensity: 1.5
 --- !u!33 &8664407125849182102
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -21419,6 +21539,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -21627,15 +21749,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed892f9d2e438e42ae2ec9c9030c81e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Object Name
-  description: Short description...
+  title: "M\xE0ng t\u1EBF b\xE0o"
+  description: "L\xE0 l\u1EDBp m\xE0ng sinh ch\u1EA5t bao b\u1ECDc b\xEAn ngo\xE0i
+    t\u1EBF b\xE0o. C\u1EA5u t\u1EA1o: g\u1ED3m l\u1EDBp k\xE9p photpholipit, protein,
+    cholesterol v\xE0 chu\u1ED7i cacbohi\u0111rat (g\u1EAFn v\u1EDBi protein ho\u1EB7c
+    lipit). \u0110\u1EB7c \u0111i\u1EC3m: c\xF3 t\xEDnh kh\u1EA3m \u0111\u1ED9ng,
+    t\xEDnh th\u1EA5m ch\u1ECDn l\u1ECDc. Ch\u1EE9c n\u0103ng: b\u1EA3o v\u1EC7 t\u1EBF
+    b\xE0o, \u0111i\u1EC1u h\xF2a trao \u0111\u1ED5i ch\u1EA5t, ti\u1EBFp nh\u1EADn
+    v\xE0 truy\u1EC1n t\xEDn hi\u1EC7u."
   pathType: 1
   partId: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: ec5eb7cf8bd2cf5449cdcf7b9b460074, type: 3}
   isValid: 1
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -21756,6 +21886,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -21790,7 +21922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed892f9d2e438e42ae2ec9c9030c81e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: "L\u01B0\u1EDBi n\u1ED9i ch\u1EA5t"
+  title: "L\u01B0\u1EDBi n\u1ED9i ch\u1EA5t h\u1EA1t"
   description: "L\xE0 h\u1EC7 th\u1ED1ng m\xE0ng n\u1ED9i b\xE0o li\xEAn ti\u1EBFp
     v\u1EDBi m\xE0ng nh\xE2n, \u0111\xF3ng vai tr\xF2 t\u1ED5ng h\u1EE3p v\xE0 v\u1EADn
     chuy\u1EC3n c\xE1c ch\u1EA5t. H\u1EC7 th\u1ED1ng n\xE0y chia l\xE0m hai lo\u1EA1i:
@@ -21808,6 +21940,9 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 1
+  blinkChildList:
+  - {fileID: 7042815410242448056}
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -21958,6 +22093,9 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 1
+  blinkChildList:
+  - {fileID: 8954984381680684626}
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -22084,6 +22222,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -22138,7 +22278,7 @@ Transform:
   m_GameObject: {fileID: 1445923543112374182}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.001397221, y: 0.028076002, z: -0.011198354}
+  m_LocalPosition: {x: -0.001397221, y: 0.02432, z: -0.01124}
   m_LocalScale: {x: 0.5818096, y: 0.5818096, z: 0.5818096}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22168,6 +22308,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -22239,6 +22381,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -22323,6 +22467,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -22452,6 +22598,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -22501,6 +22649,8 @@ MonoBehaviour:
   spacing: 1
   sortFromTop: 1
   startYOffset: 0
+  blinkChildren: 0
+  blinkChildList: []
   blinkColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   blinkSpeed: 2
   blinkIntensity: 1.5
@@ -22508,7 +22658,6 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 705507995}
   - {fileID: 1690047497}
   - {fileID: 948181428}
   - {fileID: 729216045}

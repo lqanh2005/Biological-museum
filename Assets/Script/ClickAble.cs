@@ -16,6 +16,9 @@ public class ClickAble : MonoBehaviour, IClickable
     public float spacing = 1f;
     public bool sortFromTop = true;
     public float startYOffset = 0f;
+    [Header("Blink Children")]
+    public bool blinkChildren = false;
+    public List<ClickAble> blinkChildList = new List<ClickAble>();
 
     [Header("Blink Effect")]
     public Color blinkColor = Color.yellow;
@@ -57,6 +60,8 @@ public class ClickAble : MonoBehaviour, IClickable
     // Bắt đầu nhấp nháy
     public void StartBlink()
     {
+        if (blinkChildren && blinkChildList != null)
+            foreach (var c in blinkChildList) c?.StartBlink();
         if (isBlinking) return;
         if (rend == null) return;
 
@@ -71,6 +76,8 @@ public class ClickAble : MonoBehaviour, IClickable
     // Dừng nhấp nháy
     public void StopBlink()
     {
+        if (blinkChildren && blinkChildList != null)
+            foreach (var c in blinkChildList) c?.StopBlink();
         if (!isBlinking) return;
 
         isBlinking = false;
@@ -113,6 +120,7 @@ public class ClickAble : MonoBehaviour, IClickable
             yield return null;
         }
     }
+
 
     void OnDestroy()
     {
